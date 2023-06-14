@@ -1,0 +1,55 @@
+   {% load static %}
+
+   <!DOCTYPE html>
+   <html lang="eng">
+
+   <head>
+       <meta charset="utf-8">
+       <title>FONDSystem Log-in</title>
+       <link rel="stylesheet" href="{% static 'css/TMlogin.css' %}">
+       <link rel="icon" type="image/x-icon" href="{% static  'cr_page/images/favIcon.png' %}" />
+        <link rel="stylesheet" href="{% static 'static_404/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'static_404/css/fonts.css' %}">
+        <link rel="stylesheet" href="{% static 'static_404/css/slick.css' %}">
+
+       <title>Log in</title>
+   </head>
+
+   <body>
+       <header>
+           <img src="{% static 'images/headerLogo.png' %}" />
+           <p>FOND System</p>
+
+       </header>
+       <main>
+           <div id="form_container">
+               <h1>Please Log In</h1>
+               <form method="POST" class="login_contain">
+                   {% csrf_token %}
+                   {{ login_form.as_p }}
+                   <button class="btn btn-primary" type="submit">Login</button>
+                   <a id="lost_password" href="{% url 'password_reset' %}">Lost password? Reset it!</a>
+                   {{ error_message }}
+               </form>
+           </div>
+           <div class="wrapper">
+               <div class="content_404">
+                <div class="gears_block">
+                    <img class="gears_big" src="{% static 'static_404/img/gears.svg' %}" alt="none">
+                    <img class="gears_smole" src="{% static 'static_404/img/gears.svg' %}" alt="none">
+                    <img class="gears_smolest" src="{% static 'static_404/img/gears.svg' %}" alt="none">
+                    <img class="gears_big giars_b_2" src="{% static 'static_404/img/gears.svg' %}" alt="none">
+                    <img class="gears_smole gears_s_2" src="{% static 'static_404/img/gears.svg' %}" alt="none">
+                    <img class="gears_smolest gears_smolest_2" src="{% static 'static_404/img/gears.svg' %}" alt="none">
+                </div> 
+               </div>
+            </div>
+       </main>
+
+       <footer>
+        <p>© Ucom Technical Department</p>
+        <p>Version 1.0</p>
+    </footer>
+   </body>
+
+   </html>

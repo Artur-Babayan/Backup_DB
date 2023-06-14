@@ -1,0 +1,173 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+::-moz-selection {
+    color: #fff;
+    background: #8fc630;
+}
+
+::selection {
+    color: #fff;
+    background: #8fc630;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+header {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 5em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 7%
+}
+
+header img {
+    width: 100%;
+    max-width: 90px;
+    height: 80%; /* Changed by Artur auto -> 80% */
+}
+
+header p {
+    padding: 0 20px;
+    font-size: 1.8em;
+    color: #555f46;
+    text-transform: uppercase;
+}
+
+main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 88%;
+    background-color: #2b3740;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    padding-bottom: .3em;
+}
+
+#form_container {
+    width: 500px;
+    position: absolute;
+    z-index: 1;
+}
+
+
+form {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #fff;
+    max-width: 500px;
+    width: 100%;
+    padding: 3.5em 3em;
+    -webkit-box-shadow: 0 0 3px 0 rgba(143, 198, 48, 0.6);
+    box-shadow: 0 0 3px 0 rgba(143, 198, 48, 0.6);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    border-radius: 20px;
+}
+
+.login_contain p {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-bottom: 2.5em;
+}
+
+.login_contain p label {
+    font-size: 1em;
+    color: #8086a9;
+}
+
+.login_contain p input {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 13px;
+    border: 1px solid #d6d8e6;
+    border-radius: 4px;
+    font-size: 1em;
+    -webkit-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+}
+
+.login_contain p input:focus {
+    outline: none;
+    -webkit-box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+    box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12);
+}
+
+button {
+    width: 100%;
+    padding: 9px;
+    font-size: 1.4em;
+    background: #8fc630;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    -webkit-transition: background 0.2s ease-out;
+    transition: background 0.2s ease-out;
+    font-size: 1.4em;
+    outline: none;
+}
+
+button:hover {
+    background: #2b3740;
+}
+
+#lost_password {
+    font-size: .8em;
+    color: grey;
+    text-align: center;
+    display: block;
+    margin-top: 1em;
+}
+
+footer {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* padding: 0 5em; */
+    padding: 0% 3.1% 0% 3.1%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: white;
+    height: 5%;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+}
+
+ footer > p {
+    margin-right: 6.1%;
+ }
+

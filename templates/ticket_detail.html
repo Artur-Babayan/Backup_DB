@@ -1,0 +1,186 @@
+    {% load static %}
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="Description" content="Ticked Detail">
+        <meta name="theme-color" content="#8dc52e">
+        <script type="text/javascript" src="{% static 'cr_page/styles/js_styles/jquery-3.3.1.min.js' %}"></script>
+        <script type="text/javascript" defer="defer" src="{% static 'cr_page/styles/js_styles/main_page_js/jsFiles.js' %}"></script>
+        <link rel="shortcut icon" type="image/png" href="{% static 'cr_page/images/favIcon.png' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/index.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/header.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/change_requests_table.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/add_new_request_table.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/fontAwesome/css/font-awesome.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/fontAwesome/css/font-awesome.min.css' %}" />
+        <script type="text/javascript" src="{% static 'cr_page/styles/js_styles/jsLib.js' %}"></script>
+        <title>Ticket Detail</title>
+    </head>
+
+    <body >
+        <header id="main_header">
+            <div id="top_header">
+                <div class="header_logo_container">
+                    <a href="{% url 'user-login' %}">
+                        <img alt="ucom_logo" class="header_logo" title="Ucom" src="{% static 'cr_page/images/headerLogo.png' %}" />
+                    </a>
+                    <p class="header_text">FOND SYSTEM</p>
+                </div>
+                                                <!-- Add Artur -->
+                <div class="update">
+                		<a href="/">
+                			<i class="fa fa-refresh" style="font-size:200%"></i>
+                		</a>
+                </div>
+                <div id="navigate_home">
+                    <a href="{% url 'user-login' %}">
+                        <p>Home</p>
+                    </a>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div>
+                <div class="sidebar_nav">
+                    <ul class="dropdown">
+                        {% if user.is_authenticated %}
+                        <li style="height: 165%;" class="drop_btn">
+                            <span style="color:#008a04;">User:</span>{{ user.get_username }}
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </li>
+                        <ul class="dropdown_content">
+                            <li><a class="log_in_out" id="permission" title="Your permission">Permission:Some Permissions</a></li>
+                            <li><a class="log_in_out" id="log_out" title="Click to log out" href="{% url 'logout' %}">Log out<i class="fa fa-sign-out user_logos" aria-hidden="true"></i></a></li>
+                            <li> Change Password </li>
+                            {% else %}
+                            <li><a class="log_in_out" id="log_in" href="{% url 'login'%}?next={{request.path}}">Log in<i class="fa fa-sign-in user_logos" aria-hidden="true"></i></a></li>
+                        </ul>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div id="mini_header">
+            </div>
+        </header>
+
+    <div class='form_class' >
+            <p class="add_modal_header" style="right: 43vw;">Ticket Detail</p>
+            <a href="{% url 'all_ticket' %}"><span class="close" title="close">&times;</span></a>
+            	<h1 style="text-align: center; margin-top: 1%; margin-bottom: 1%;"> Selected Ticket Detail </h1>
+            	<div class="tick_detail">
+					<div class="tables_p">
+					<div class="tab_p">
+						<h2> Operation Level </h2>
+						<div class="p1">  
+								<!-- Performer Group -->
+							<h4 class="h_4">Ticket ID : </h4> <span> {{ ticket.ticket_id|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Ticket Type : </h4> <span>  {{ ticket.ticket_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Ticket Thread Name : </h4> <span>  {{ ticket.ticket_thread_name|default_if_none:'' }} </span></br>
+							<h4 class="h_4">BCRM ID : </h4> <span>  {{ ticket.bcrm_id|default_if_none:'' }} </span></br>
+							<h4 class="h_4">RT ID : </h4> <span>  {{ ticket.rt_id|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Ticketing ID : </h4> <span>  {{ ticket.ticketing_id|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Branch Type: </h4> <span>  {{ ticket.branch_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Region : </h4> <span>  {{ ticket.region|default_if_none:'' }} </span></br>
+							<h4 class="h_4">District : </h4> <span>  {{ ticket.district|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Address : </h4> <span>  {{ ticket.address|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Registration Date : </h4> <span>  {{ ticket.registration_date |default_if_none:''}} </span></br>
+							<h4 class="h_4">Creation Date : </h4> <span>  {{ ticket.creation_date|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Tariff ID : </h4> <span>  {{ ticket.tarif_id |default_if_none:'' }} </span></br>
+							<h4 class="h_4">Service Type : </h4> <span>  {{ ticket.service_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Service Quantity : </h4> <span>  {{ ticket.service_quantity|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Due Date : </h4> <span>  {{ ticket.due_date|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Performer : </h4> <span>  {{ ticket.performer|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Creator : </h4> <span>  {{ ticket.creator|default_if_none:'' }} </span></br>
+					 		<h4 class="h_4">Performer Group : </h4> <span>  {{ ticket.performer_group|default_if_none:'' }} </span></br>
+					 		<h4 class="h_4">Status : </h4> <span>  {{ ticket.status|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Deadline : </h4> <span>  {{ ticket.deadline|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Comment : </h4> <span> {{ ticket.comment|default_if_none:'' }} </span></br>
+
+						</div>
+					</div>
+					<div class="t_grp">
+							<h2> Technical Level </h2>
+					<div class="tab_p_2">
+						<div class="p1 p2"> 	
+									<!-- Technikal Group -->
+							<h4 class="h_4">Car Number : </h4> <span> {{ ticket.car_number|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Tower Working Time : </h4> <span> {{ ticket.tower_working_time|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Current or capital : </h4> <span> {{ ticket.current_or_capital|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Warehouse : </h4> <span> {{ ticket.warehouse|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Channel : </h4> <span> {{ ticket.channel|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Gpon Type : </h4> <span> {{ ticket.gpon_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Gpon QTY : </h4> <span> {{ ticket.gpon_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">STB-1 Type : </h4> <span> {{ ticket.stb_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">STB-2 Type : </h4> <span> {{ ticket.stb_2_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">STB-3 Type : </h4> <span> {{ ticket.stb_3_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">WIFI Router Type : </h4> <span> {{ ticket.wifi_router_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">WIFI Router QTY : </h4> <span> {{ ticket.wifi_router_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Other Device Type : </h4> <span> {{ ticket.other_device_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Other Device QTY : </h4> <span> {{ ticket.other_device_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Points : </h4> <span> {{ ticket.points|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Optical Cable Type : </h4> <span> {{ ticket.optical_cabel_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Optical Cable Length : </h4> <span> {{ ticket.optical_cable_length|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Optical Cable Begin : </h4> <span> {{ ticket.optical_cable_begin|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Optical Cable End : </h4> <span> {{ ticket.optical_cable_end|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Optical Cable Code : </h4> <span> {{ ticket.optical_cable_code|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Demontage Optical Cable Type : </h4> <span> {{ ticket.demontage_optical_cable_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Demontage Optical Cable Lenght : </h4> <span> {{ ticket.demontage_optical_cable_length|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Defected Optical Cable Type : </h4> <span> {{ ticket.defected_optical_cable_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Defected Optical Cable Lenght : </h4> <span> {{ ticket.defected_optical_cable_length|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Lan Cable Type : </h4> <span> {{ ticket.lan_cable_type|default_if_none:'' }} </span></br>
+							<h4 class="h_4">UTP Cable Length : </h4> <span> {{ ticket.utp_cable_length|default_if_none:'' }} </span></br>
+							<h4 class="h_4">UTP Cable Begin : </h4> <span> {{ ticket.utp_cable_begin|default_if_none:'' }} </span></br>
+							<h4 class="h_4">UTP Cable End : </h4> <span> {{ ticket.utp_cable_end|default_if_none:'' }} </span></br>
+							<h4 class="h_4">UTP Cable Code : </h4> <span> {{ ticket.utp_cable_code|default_if_none:'' }} </span></br>
+						</div>
+					<div class="p2">
+							
+							<h4 class="h_4">FTP Cable Length : </h4> <span> {{ ticket.ftp_cable_length|default_if_none:'' }} </span></br>
+							<h4 class="h_4">FTP Cable Begin : </h4> <span> {{ ticket.ftp_cable_begin|default_if_none:'' }} </span></br>
+							<h4 class="h_4">FTP Cable End : </h4> <span> {{ ticket.ftp_cable_end|default_if_none:'' }} </span></br>
+							<h4 class="h_4">FTP Cable Code : </h4> <span> {{ ticket.ftp_cable_code|default_if_none:'' }} </span></br>
+							<h4 class="h_4">HDMI QTY : </h4> <span> {{ ticket.hdmi_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Remote Control QTY : </h4> <span> {{ ticket.remote_control_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Muft : </h4> <span> {{ ticket.muft|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Muft QTY : </h4> <span> {{ ticket.muft_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Muft : </h4> <span> {{ ticket.muft_2|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Muft-2 QTY : </h4> <span> {{ ticket.muft_2_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Muft-3 : </h4> <span> {{ ticket.muft_3|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Muft-3 QTY: </h4> <span> {{ ticket.muft_3_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Spliter : </h4> <span> {{ ticket.spliter|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Spliter QTY : </h4> <span> {{ ticket.spliter_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Spliter-2 : </h4> <span> {{ ticket.spliter_2|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Spliter-2 QTY : </h4> <span> {{ ticket.spliter_2_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Spliter-3 : </h4> <span> {{ ticket.spliter_3|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Spliter-3 QTY : </h4> <span> {{ ticket.spliter_3_qty|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Technician-1 : </h4> <span> {{ ticket.technician1|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Technician-2 : </h4> <span> {{ ticket.technician2|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Technician-3 : </h4> <span> {{ ticket.technician3|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Technician-4 : </h4> <span> {{ ticket.technician4|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Technician-5 : </h4> <span> {{ ticket.technician5|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Tech Comment : </h4> <span> {{ ticket.tech_comment|default_if_none:'' }} </span></br>
+					</div>
+				</div>
+			</div>
+					<div class="tab_p">
+						<h2> Config Level </h2>
+						<div class="p1">
+								<!-- Config Level -->
+							<h4 class="h_4">Config Date : </h4> <span> {{ ticket.config_date|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Configuer Name : </h4> <span> {{ ticket.configuer_name|default_if_none:'' }} </span></br>
+							<h4 class="h_4">Trubka :  </h4> <span> {{ ticket.trubka|default_if_none:''}} </span></br>
+							<h4 class="h_4">Color Adjustment : </h4> <span> {{ ticket.color_adjustment|default_if_none:'' }} </span></br>
+						   	<h4 class="h_4">BLM/CLX : </h4> <span> {{ ticket.blm_clx|default_if_none:'' }} </span></br>
+						   	<h4 class="h_4">Service Link Measure : </h4> <span> {{ ticket.service_link_measure|default_if_none:'' }} </span></br>
+							<h4 class="h_4">End Date : </h4> <span> {{ ticket.end_date|default_if_none:'' }} </span></br>
+						</div>
+					</div>
+					</div>
+					</div>
+				</p>
+            </form>
+    	</div>
+    	{% include "base_footer.html" %}
+        {% block footer %} {% endblock %}
+</body>
+</html>

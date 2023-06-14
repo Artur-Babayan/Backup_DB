@@ -1,0 +1,564 @@
+.text_image{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+
+    .text{
+        
+        h2{
+            &.left{
+                background-color: #fff;
+            }
+        }
+
+        height: auto;
+        box-sizing: border-box;
+        width: calc(50% - 100px);
+        
+        order:2;
+        margin-left: auto;
+        // height: 500px;
+        padding: 50px 0;
+        // padding-bottom: 100px;
+        align-items: center;
+        vertical-align: middle;
+    }
+    .image_shale{
+        overflow: hidden;
+        vertical-align: middle;
+        align-items: center;
+        box-sizing: border-box;
+        // height: 304px;
+        // height: 350px;
+        width: 50%;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        background-color: #fff;
+
+        position: absolute;
+        height: 100%;
+        left: 0;
+
+
+
+        h2{
+            float: right;
+            // margin: 0px auto;
+            margin-top: 130px;
+            margin-right: 100px;
+            color: #fff;
+            z-index: 2;
+            &::before, &::after{
+                background-color: #fff;
+            }
+        }
+    }
+}
+.right{
+    .image_shale{
+        // order: 2;
+        right: 0;
+        left: auto;
+        opacity: 1;
+
+        h2{
+            margin-right: 0;
+            margin-left: 100px;
+            float: left;
+        }
+    }
+
+    .text{
+        margin-left: 0;
+        margin-right: auto;
+
+    }
+}
+
+.about_company{
+    position: relative;
+
+    &:before{
+        content: 'about company';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 160px;
+        text-transform: uppercase;
+        font-family: 'Comfortaa', cursive;
+        opacity: 10%;
+        color: #000;
+        width: 600px;
+    }
+    .text_image{
+        .text{
+            width: calc(50%);
+            margin: 0 0;
+            padding-right: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: top;
+
+            .text_main{
+                width: calc(100% - 180px);
+            }
+
+            .benefits{
+                .number{
+                    margin: 14px 0;
+                    font-size: 48px;
+                    color: $main-color;
+                    display: block;
+                    font-family: 'Comfortaa', cursive;
+                }
+            }
+        }
+        .image_shale{
+            border-top-left-radius: 25px;
+
+            img{
+                object-fit: contain;
+            }
+        }
+    }
+}
+.our_vision{
+    position: relative;
+
+    &:before{
+        content: 'OUR VISION';
+        position: absolute;
+        text-align: right;
+        right: 0;
+        top: 0;
+        font-size: 160px;
+        text-transform: uppercase;
+        font-family: 'Comfortaa', cursive;
+        opacity: 10%;
+        color: #000;
+        width: 600px;
+    }
+
+
+    .text_image{
+        .image_shale{
+            border-top-left-radius: 25px;
+            // border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 25px;
+            background-color: #000;
+
+            img{
+                opacity: 50%;
+            }
+        }
+    }
+}
+.our_mission{
+    position: relative;
+
+    &:before{
+        content: 'OUR MISSION';
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 160px;
+        text-transform: uppercase;
+        font-family: 'Comfortaa', cursive;
+        opacity: 10%;
+        color: #000;
+        width: 600px;
+
+    }
+
+    .image_shale{
+        background-color: #000;
+        border-bottom-left-radius: 25px;
+
+        img{
+            opacity: 50%;
+        }
+    }
+}
+
+.text_img_block{
+    .text_image{
+        align-items: center;
+
+        &:before{
+            content: '';
+            position: absolute;
+            left: -15%;
+            top: 0px;
+            font-size: 160px;
+            text-transform: uppercase;
+            font-family: 'Comfortaa', cursive;
+            opacity: 10%;
+            color: #000;
+            width: 220px;
+            height: 270px;
+            // background-image: url(../img/icon_services_1.svg);
+            // background-color: aqua;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: invert(100%);
+        }
+
+        // .text{
+        //     // padding-bottom: 0px;
+        // }
+
+    }
+    .text_image:nth-child(even){
+        &:before{
+            right: -15%;
+            left: auto;
+        }
+        .image_shale{
+            border-top-left-radius: 25px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 25px;
+        }
+    }
+    .text_image:nth-child(odd){
+        .image_shale{
+            border-top-left-radius: 0px;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            border-bottom-left-radius: 0px;
+        }
+    }
+
+    .text_image:nth-child(1){
+        .image_shale{
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            border-bottom-left-radius: 0px;
+        }
+    }
+    .text_image:last-child{
+        .image_shale{
+            border-top-left-radius: 25px;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+    }
+
+    .serv_1{
+        &::before{
+            background-image: url(../img/icon_services_1.svg);
+        }
+    }
+    .serv_2{
+        &::before{
+            background-image: url(../img/icon_services_2.svg);
+        }
+    }
+    .serv_3{
+        &::before{
+            background-image: url(../img/icon_services_3.svg);
+        }
+    }
+    .serv_4{
+        &::before{
+            background-image: url(../img/icon_services_4.svg);
+        }
+    }
+}
+@media screen and (max-width:1670px) {
+    .text_img_block{
+        .text_image{
+            &::before{
+                left: -8%;
+            }
+        }
+        .text_image:nth-child(even){
+            &::before{
+                left: auto;
+                right: -8%;
+            }
+        }
+    }
+}
+@media screen and (max-width:1210px){
+    .text_image{
+        .text{
+            width: calc(50% - 100px);
+            // margin: 0 auto;
+    
+            padding-bottom: 100px;
+        }
+    }
+
+    .about_company{
+        &:before{
+            font-size: 130px;
+        }
+    }
+
+    .our_vision{
+        &:before{
+            font-size: 130px;
+        }
+    }
+
+    .our_mission{
+        &:before{
+            font-size: 130px;
+        }
+    }
+}
+
+@media screen and (max-width:1060px){
+    .text_image{
+        .text{
+            // width: calc(50% - 80px);
+
+            width: calc(50% - 40px);
+    
+            padding-bottom: 50px;
+        }
+        .image_shale{
+            h2{
+                float: right;
+                margin-right: 50px;
+            }
+
+            h2.left{
+                margin-left: 50px;
+                float: left;
+            }
+        }
+        .right{
+            h2{
+                float: left;
+                margin-left: 50px;
+            }
+        }
+    }
+    .about_company{
+        &:before{
+            font-size: 120px;
+        }
+        .text_image{
+            .text{
+                flex-wrap: wrap;
+                .text_main{
+                    width: 100%;
+                }
+    
+                .benefits{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .item{
+                        width: 30%;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .our_vision{
+        &:before{
+            font-size: 120px;
+        }
+    }
+
+    .our_mission{
+        &:before{
+            font-size: 120px;
+        }
+    }
+}
+@media screen and (max-width:820px){
+    .text_img_block{
+        // padding-top: 200px;
+        .text_image.text{
+            padding-bottom: 100px;
+            padding-top: 30px;
+
+        }
+
+        .image_shale{
+            top: 0;
+            height: 200px;
+        }  
+        
+    }
+    .text_image{
+        padding-top: 320px;
+        flex-wrap: wrap;
+    
+        .text{
+            width: 90%;
+            order:2;
+    
+            padding: 0;
+            margin: 0;
+            padding-bottom: 100px;
+            padding-top: 30px;
+
+        }
+        .image_shale{
+            order: 1;
+            height: 304px;
+            width: 100%;
+            border-radius: 25px;
+            float: none;
+    
+            h2{
+                float: right;
+                margin-top: 150px;
+                margin-right: 100px;
+                color: #fff;
+                z-index: 2;
+                &::before, &::after{
+                    background-color: #fff;
+                }
+            }
+        }
+
+        &.right{
+            .image_shale{
+                order: 1;
+        
+                h2{
+                    margin-right: 0;
+                    margin-left: 100px;
+                    float: left;
+                }
+            }
+        }
+    }
+
+    .about_company{
+        position: relative;
+    
+        &:before{
+            left: 0;
+            top: 50%;
+        }
+        .text_image{
+            .text{
+                width: 90%;
+                padding-right: 0;
+                margin: 0 auto;
+    
+                .text_main{
+                    width: 100%;
+                }
+    
+            }
+            .image_shale{
+                border-radius: 25px;
+                top: 0;
+            }
+        }
+    }
+    .our_vision{
+        position: relative;
+    
+        &:before{
+            text-align: right;
+            right: 0;
+            top: 50%;
+        }
+    
+    
+        .text_image{
+            .image_shale{
+                border-radius: 25px;
+                top: 0;
+            }
+        }
+    }
+    .our_mission{
+        &:before{
+            left: 0;
+            top: 50%;
+        }
+    
+        .image_shale{
+            border-radius: 25px;
+            top: 0;
+    
+            img{
+                opacity: 50%;
+            }
+        }
+    }
+
+    .text_img_block{
+        .text_image:nth-child(odd),
+        .text_image:nth-child(even){
+            .image_shale{
+                border-radius: 25px;
+            }
+        }
+
+        .text_image{
+            &::before{
+                top: 330px;
+            }
+        }
+    }
+}
+@media screen and (max-width:500px) {
+    .about_company::before,
+    .our_mission::before,
+    .our_vision::before{
+        font-size: 90px;
+        width: 400px;
+    }
+    .about_company{
+        .text_image{
+            
+            .text{
+                padding-top: 0px;
+                // margin-top: -10px;
+            }
+        }
+
+    }
+    .text_image{
+        .image_shale{
+            h2{
+                float: right;
+                margin-right: 20px;
+            }
+
+            h2.left{
+                margin-left: 20px;
+                // width: 50%;
+            }
+        }
+        .right{
+            h2{
+                float: left;
+                margin-left: 0px;
+            }
+        }
+    }
+}
+@media screen and (max-width:370px) {
+    .about_company{
+        .text_image{
+            .text{
+                padding-top: 0px;
+                margin-top: -40px;
+            }
+            .image_shale{
+                background-color: transparent;
+            }
+        }
+
+    }
+}

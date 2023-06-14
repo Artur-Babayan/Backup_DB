@@ -1,0 +1,18 @@
+.slick-list {
+    overflow: hidden;
+}
+
+.slick-track{
+    width: 100%;
+    display: flex;
+    position: relative;
+}
+
+/* Слайдер */
+.slick-slider{
+    position: relative;
+}
+/* Слайдер запущен */
+.slick-slider.slick-initialized{}
+/* Слайдер с точками */
+.slick-slider.slick-dotted{}

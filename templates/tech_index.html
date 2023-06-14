@@ -1,0 +1,43 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8">
+    <title> All Tickets List </title>
+</head>
+<body>
+  <form method="get">
+    {{ filter.form.as_table }}
+    <button type="submit"> Filter Ticket </button>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Ticket Type</th>
+        <th>Ticket Thread Name</th>
+        <th>Status</th>
+        <th>Creation Date</th>
+        <th>Creator</th>
+	<th>View More</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ticket in filter.qs %}
+        <tr>
+          <td>{{ ticket.ticket_type }}</td>
+          <td>{{ ticket.ticket_thread_name }}</td>
+          <td>{{ ticket.status }}</td>
+          <td>{{ ticket.creation_date }}</td>
+          <td>{{ ticket.creator }}</td>
+	  <td> <a class="news_block_container" href="{% url 'tech_update' pk=ticket.ticket_id %}"> Edit Ticket </a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5"> Active Ticket Doesnt Exist </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

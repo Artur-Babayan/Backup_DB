@@ -1,0 +1,287 @@
+    {% load static %}
+    {% load user_tags %}
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="Description" content="Fiber Optic Network Department">
+        <meta name="theme-color" content="#8dc52e">
+        <script type="text/javascript" src="{% static 'cr_page/styles/js_styles/jquery-3.3.1.min.js' %}"></script>
+        <script type="text/javascript" defer="defer" src="{% static 'cr_page/styles/js_styles/main_page_js/jsFiles.js' %}"></script>
+        <link rel="shortcut icon" type="image/png" href="{% static 'cr_page/images/favIcon.png' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/index.css' %}" />
+		<link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/header.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/change_requests_table.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/css_styles/main_page_styles/add_new_request_table.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/fontAwesome/css/font-awesome.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'cr_page/styles/fontAwesome/css/font-awesome.min.css' %}" />
+
+        <script type="text/javascript" src="{% static 'cr_page/styles/js_styles/jsLib.js' %}"></script>
+        <title>FOND Project </title>
+    </head>
+
+    <body onload="loader_function()">
+        <div id="loader"></div>
+        <header id="main_header">
+            <div id="top_header">
+                <div class="header_logo_container">
+                    <a href="{% url 'user-login' %}">
+                        <img alt="ucom_logo" class="header_logo" title="Ucom" src="{% static 'cr_page/images/headerLogo.png' %}" />
+                    </a>
+		              <p class="header_text">FOND SYSTEM  ՎԵՐՋԱՊԵՍ  </p>
+                </div>
+                <!-- Add Artur -->
+                <div class="update">
+                		<a href="{% url 'my_quality_ticket' %}">
+                			<i class="fa fa-refresh" style="font-size:200%"></i>
+                		</a>
+                </div>
+               <!-- <div id="navigate_home">
+                    <a href="{% url 'all_ticket' %}">
+                        <p>Home</p>
+                    </a>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </div> -->
+                <div class="sidebar_nav">
+                    <ul class="dropdown">
+                        {% if user.is_authenticated %}
+                        <li style="height: 140%;" class="drop_btn">
+                            <span style="color:#008a04;">User</span>:{{ user.get_username }}
+                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                        </li>
+                        <ul class="dropdown_content">
+			   <li><a class="log_in_out" id="permission" title="Your permission">Permission: {{ user.groups.all.0.name }} </a></li>
+                           <li><a class="log_in_out" id="log_out" title="Click to log out" href="{% url 'logout' %}">Log out<i class="fa fa-sign-out user_logos" aria-hidden="true"></i></a></li>
+                           <li><a href="{% url 'user-login' %}" class="log_in_out" title="Click to change your current password">Change Password</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div id="mini_header">
+            <div class="counter_ticet">
+                <div class="counter" style="color:white">
+                        <span style="color: #ffffff">All</span> : {{ all_count }}
+                </div>
+            	<div class="counter" style="color:white">
+			<span style="color: #23bd23">Done</span> : {{ done_count }}
+            	</div>
+            	<div class="counter" style="color:white">
+			<span style="color: #7474ff">Waiting</span> : {{ wait_count }}
+            	</div>
+            	<div class="counter" style="color:white">
+			<span style="color:yellow">Pending</span> : {{ pend_count }}
+            	</div>
+		<div class="counter" style="color:white">
+                        <span style="color:#f2691d">Config</span> : {{ conf_count }}
+                </div>
+            	<div class="counter" style="color:white">
+			<span style="color:red">Rejected</span> : {{ rej_count }}
+            	</div>
+            </div>
+	    		<h1>Quality Ticket</h1>
+		        {% if user.groups.all.0.name == 'Operational Level' %}
+                	<a href="{% url 'create_ticket' %}" style="margin-left: 5%;">
+				<span class="project_item main_tab" title="Create New Ticket">Create New Ticket</span>
+			</a>
+		        {% endif %}
+		        {% if request.user|has_group:'Connection Group' or request.user|has_group:'Quality Group' or  request.user|has_group:'Deinstallation Group' or request.user|has_group:'Emergency Group' or request.user|has_group:'Construction Group' or request.user|has_group:'Servicing Group' or request.user|has_group:'Welding Group' %}
+				<a href="{% url 'team_ticket' %}" style="margin-left: 1%;"><span class="project_item main_tab" title="Team Ticket">My Team Ticket</span></a>
+		      {% endif %}
+		      {% if not request.user|has_group:'Quality Group' %}
+              	      <a href="{% url 'all_ticket' %}" style="margin-left: 1%;">
+		  	<span class="project_item main_tab" title="My Ticket"> My Ticket</span>
+                      </a>
+	    	{% endif %}
+	    </div>
+        </header>
+        <main id="main">
+            {% if user.is_authenticated %}
+            <table id="main_table" class="tab_content sortable_table scroll scroll_width_thin">
+                <tbody class="main_table_tbody">
+                    <tr>
+                        {% block content %}
+                        <form method="get">     
+                            <div class="field_input" id="search_container">
+                                {{ filter.form.as_p }}
+                                <div id="search_id">
+					<button type="submit" id="search_id">	<i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+				</div>
+                            </div>
+
+                        </form>
+                        {% endblock %}
+                    </tr>
+                    {% for ticket in ticket_list reversed %}
+                    <tr class="grid_container">
+                        {% if ticket.bcrm_id   %}
+                            <td title="BCRM ID">{{ ticket.bcrm_id}}</td>
+                        {% elif ticket.rt_id  %}
+                            <td title="RT ID">{{ ticket.rt_id}}</td>
+                        {% elif ticket.ticketing_id  %}
+                            <td title="TICKETING ID">{{ ticket.ticketing_id}}</td>
+                        {% endif %}
+                        <td title="Ticket Thread" class="site_id scroll scroll_width_thin">{{ ticket.ticket_thread_name }}</td>
+                        <td title="Service Type" class="cell_id scroll scroll_width_thin">{{ ticket.service_type }}</td>
+                        <td id='ticket_id' title="Quality Status" class="priority scroll scroll_width_thin">{{ ticket.quality_status }}</td>
+                        <td title="Mistake Type" class="scroll scroll_width_thin">{{ ticket.quality_mistake }}</td>
+                        <td title="Qualiter" class="scroll scroll_width_thin">{{ ticket.qualiter }}</td>
+                        <td title="District" class="scroll scroll_width_thin">{{ ticket.district }}</td>
+                        <td title="Address" class="scroll scroll_width_thin">{{ ticket.address }}</td>
+                        <td title="Create Date" class="initated_by scroll scroll_width_thin">{{ ticket.creation_date }}</td>
+                        <td title="End Date" class="scroll scroll_width_thin">{{ ticket.end_date }}</td>
+                        <td title="Quality Date" class="implementer scroll scroll_width_thin">{{ ticket.quality_date }}</td>
+                        <td title="Quality Deadline" class="scroll scroll_width_thin">{{ ticket.quality_deadline }}</td>
+				        <td title="Quality Comment" class="scroll scroll_width_thin">{{ ticket.quality_comment }}</td>
+                        <td title="Branch" class="scroll scroll_width_thin">{{ ticket.branch_type }}</td>
+                        <td title="Click to Edit Request" class="scroll scroll_width_thin" id="edit_button_td" style="margin-top: 2x;">
+                            <div class="dropdown_edit">
+				{% if user.groups.all.0.name == 'Operational Level' %}
+                                <a class="btn btn_default" href="{% url 'op_update' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+				{% elif user.groups.all.0.name == 'All Levels' %}
+                                <a class="btn btn_default" href="{% url 'ticket_detail' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-file-text-o" aria-hidden="true" title="View Ticket"></i>
+                		{% elif user.groups.all.0.name == 'Technical Level' %}
+                                <a class="btn btn_default" href="{% url 'tech_update' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+                		{% elif user.groups.all.0.name == 'Config Level' %}
+                                <a class="btn btn_default" href="{% url 'conf_update' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+				{% elif request.user|has_group:'Quality Group' %}
+                                <a class="btn btn_default" href="{% url 'quality_ticket_detail' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+
+					{% endif %}
+                                        </div>
+                                    </span>
+                                </a>
+       
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <canvas id="canvas"></canvas>
+            <form method="post" action="{% url 'login' %}" style="position:absolute">
+                <div class="container">
+                    <div class="box">
+                        <a href="{% url 'login'%}" id="click_log_in_button">You are not autentificated.</a>
+                    </div>
+                </div>
+            </form> 
+
+
+            {% endif %}
+        </main>
+
+                    <div id='ticket_pagination'>
+            {% if is_paginated %}
+	    	{% if request.get_full_path|length > 25 %}
+                	{% if page_obj.has_previous %}
+                    		<a href="?page={{ page_obj.previous_page_number }}&{{ request.get_full_path|slice:'20:' }}" class="page_prev"> << </a>
+                	{% endif %}
+                    		<p> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>.
+                	{% if page_obj.has_next %}
+                    		<a href="?page={{ page_obj.next_page_number }}&{{ request.get_full_path|slice:'20:' }}" class="page_next"> >> </a>
+			{% endif %}
+		{% else %}
+		        {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}" class="page_prev"> << </a>
+                        {% endif %}
+                               <p> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>.
+                        {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}" class="page_next"> >> </a>
+                        {% endif %}
+
+
+		{% endif %}
+            {% else %}
+            <p>  . </p>
+            {% endif %}
+        </div>
+
+
+        {% include "base_footer.html" %}
+        {% block footer %} {% endblock %}
+        		<!-- Change start -->
+		<table class="table_field_input_header">
+			<tbody class="tb_body">
+				<tr>
+				<form>
+				 <div class="field_input_header">
+				    <tr class="grid_container_hd">
+			        <td class="td_1" title="name">ID</td>
+			        <td class="td_2" title="name">Ticket Thread</td>
+			        <td class="td_3" title="name">Service Type</td>
+			        <td class="td_4" title="name">Status</td>
+			        <td class="td_5" title="name">Mistake Type</td>
+			        <td class="td_6" title="name">Qualiter</td>
+			        <td class="td_7" title="name">District</td>
+			        <td class="td_8" title="name">Address</td>
+			        <td class="td_9" title="name">Create Date</td>
+			        <td class="td_10" title="name">End Date</td>
+			        <td class="td_11" title="name">Quality Date</td>
+			        <td class="td_12" title="name">Quality Deadline</td>
+			        <td class="td_13" title="name">Quality Comment</td>
+			        <td class="td_14" title="name">Branch</td>
+				    </tr>
+				</div>
+				</form>
+				</tr>
+			</tbody>
+		</table>
+        					<!-- Change end -->
+    </body>
+<style>
+.grid_container {
+        grid-template-columns: 2.79% 7.62% 7.91% 4.7% 9.3% 7.85% 6.3% 6.2% 6.2% 7.05% 7.85% 7.8% 13.25% 2.35% 3%;
+}
+h1 {
+   text-align: center;
+   margin-top: 1%;
+   margin-bottom: 1%;
+   position: absolute; 
+   top: -1%; 
+   left: 45%; 
+   font-weight: 100; 
+   font-variant-caps: small-caps;	
+}
+</style>
+	
+    <script>
+        var main_table_scroll = document.getElementById('main_table');
+        main_table_scroll.scrollTop = main_table_scroll.scrollHeight;
+
+var th = document.querySelectorAll('td')
+for (let cell of th) {
+  if(cell.innerHTML === 'Checked'){
+    cell.style.backgroundColor = '#a0ea9b'
+  }
+  if(cell.innerHTML === 'Incomplete'){
+    cell.style.backgroundColor = '#cdefff'
+  }
+  if(cell.innerHTML === 'Punishment'){
+    cell.style.backgroundColor = '#ffb5b5'
+  }
+  if(cell.innerHTML === 'Corrected'){
+    cell.style.backgroundColor = '#fffdb6'
+  }
+  if(cell.innerHTML.includes('Solved')){
+    cell.style.backgroundColor = '#ffd3a0'
+  }
+
+}
+</style>
+    </script>
+
+    </html>
