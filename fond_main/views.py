@@ -69,19 +69,6 @@ class AllTicketView(BaseFilterView, ListView):
     paginate_by = 200
     context_object_name = 'ticket_list'
 
-    def get_queryset(self):
-        if self.request.user.groups.filter(name='All Levels').exists():
-            return Ticket.objects.all().order_by('-creation_date')
-        elif self.request.user.groups.filter(name='Technical Level').exists():
-            return Ticket.objects.filter(performer=self.request.user.id).exclude(status='Waiting').exclude( Q(status__in=['Done', 'Reject']) & Q(end_date__lte=date(2023, 2, 28)) ).order_by('-creation_date')
-        elif self.request.user.groups.filter(name='Quality Group').exists():
-            return Ticket.objects.all().order_by('-creation_date')
-        elif self.request.user.groups.filter(name='Operational Level').exists():
-            return Ticket.objects.filter( Q(creator=self.request.user.id) | Q(performer=self.request.user.id)).exclude( Q(status__in=['Done', 'Reject']) & Q(end_date__lte=date(2023, 2, 28)) ).order_by('-creation_date')
-        elif self.request.user.groups.filter(name='Config Level').exists():
-            return Ticket.objects.filter( Q(status__in=['Config', 'Done']) & Q(configuer_name__isnull=True) & Q(ticket_type='Connection') & Q(ticket_thread_name__in=['Service Additional request', 'Service Creation request'])).exclude( Q(status__in=['Done', 'Reject']) & Q(end_date__lte=date(2023, 2, 28)) ).order_by('-creation_date')
-        else :
-            return redirect('user-login')
 
     def get_context_data(self, **kwargs):
         context = super(AllTicketView, self).get_context_data(**kwargs)
@@ -232,33 +219,21 @@ class TicketCreateView(CreateView):
     def get(self, request, *args, **kwargs):
         context = {'form': CreateTicketForm()}
         return render(request, 'ticket_create.html', context)
-    # --------- Davoyi gracna ---------
 
-    # def post(self, request, *args, **kwargs):
-    #     form = CreateTicketForm(request.POST)
-    #     if form.is_valid():
-    #         book = form.save()
-    #         book.save()
-    #         return redirect('all_ticket')
-    #         #return HttpResponseRedirect(reverse_lazy('ticket_detail', args=[book.id]))
-    #     return render(request, 'ticket_create.html', {'form': form})
 
-    #------------ Arturi gracna --------
+     def post(self, request, *args, **kwargs):
+         form = CreateTicketForm(request.POST)
+         if form.is_valid():
+             book = form.save()
+             book.save()
+             return redirect('all_ticket')
+             #return HttpResponseRedirect(reverse_lazy('ticket_detail', args=[book.id]))
+         return render(request, 'ticket_create.html', {'form': form})
 
-    def post(self, request, *args, **kwargs):
-        form = CreateTicketForm(request.POST)
-        existing_tickets = None
 
-        if form.is_valid():
-            bcrm_id = form.cleaned_data.get('bcrm_id')
-            if Ticket.objects.filter(bcrm_id=bcrm_id).exists():
-                existing_tickets = Ticket.objects.filter(bcrm_id=bcrm_id)
-            else:
-                ticket = form.save()
-                ticket.save()
-                return redirect('all_ticket')
 
-        return render(request, 'ticket_create.html', {'form': form, 'existing_tickets': existing_tickets})
+  
+
 
 #-------------------------------- Ticket Update ---------------------------
 

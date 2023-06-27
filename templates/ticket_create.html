@@ -73,27 +73,18 @@
 
 		       {% csrf_token %}
 			<div class="tic_create">
-				<p>  {{ form.ticket_type.label_tag }} {{ form.ticket_type }} {{ form.ticket_thread_name.label_tag }} {{ form.ticket_thread_name }} {{ form.status.label_tag }} {{ form.status }} {{ form.creator.label_tag }} {{ form.creator }}</p>
+				<p>  {{ form.ticket_type.label_tag }} {{ form.ticket_type }} {{ form.ticket_thread_name.label_tag }} {{ form.ticket_thread_name }} {{ form.status.label_tag }} {{ form.status }} {{form.creator.label_tag }} {{ form.creator }}</p>
 				<p>  {{ form.bcrm_id.label_tag }} {{ form.bcrm_id }} {{ form.rt_id.label_tag }}  {{ form.rt_id }} {{ form.ticketing_id.label_tag }} {{ form.ticketing_id }} {{ form.performer.label_tag }} {{ form.performer }} </p>
 				<p>  {{ form.branch_type.label_tag }}  {{ form.branch_type }}  {{ form.region.label_tag }}  {{ form.region }} {{ form.district.label_tag }}  {{ form.district }} {{ form.performer_group.label_tag }} {{ form.performer_group }}</p>
-				<p>  {{ form.address.label_tag }} {{ form.address }} {{ form.tarif_id.label_tag }} {{ form.tarif_id }} {{ form.service_type.label_tag }} {{ form.service_type }} {{ form.service_quantity.label_tag }} {{ form.service_quantity}}</p>
+				<p>  {{ form.address.label_tag }} {{ form.address }} {{ form.tarif_id.label_tag }} {{ form.tarif_id }} {{ form.service_type.label_tag }} {{ form.service_type }} {{form.service_quantity.label_tag }} {{ form.service_quantity}}</p>
 				<p>  {{ form.registration_date.label_tag }} {{ form.registration_date }} {{ form.due_date.label_tag }} {{ form.due_date }} {{ form.comment.label_tag }} {{ form.comment }}</p>
 			</div>
-            {% if existing_tickets %}
-                <input type="submit" name="action" value="Create Ticket">
-            {% else %}
-                <input type="submit" name="action" value="Check/Create Ticket">
-            {% endif %}
+            	<div class="create_btn"> 
+			<input type="submit" value="Create Ticket">
+		</div>
             </form>
-<!--        Avelacrel e Artury-->
-            {% if existing_tickets %}
-              <h2>Nman bcrm_id ticket goyutyun uni:</h2>
-              <ul>
-                {% for ticket in existing_tickets %}
-                  <li>{{ ticket }}</li>
-                {% endfor %}
-              </ul>
-            {% endif %}
+
+            
     </div>
 </body>
 <style>

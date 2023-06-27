@@ -60,153 +60,153 @@
                     </ul>
                 </div>
             </div>
-<!--            <div id="mini_header">-->
-<!--            <div class="counter_ticet">-->
-<!--                <div class="counter" style="color:white">-->
-<!--                        <span style="color: #ffffff">All</span> : {{ all_count }}-->
-<!--                </div>-->
-<!--            	<div class="counter" style="color:white">-->
-<!--			<span style="color: #23bd23">Done</span> : {{ done_count }}-->
-<!--            	</div>-->
-<!--            	<div class="counter" style="color:white">-->
-<!--			<span style="color: #7474ff">Waiting</span> : {{ wait_count }}-->
-<!--            	</div>-->
-<!--            	<div class="counter" style="color:white">-->
-<!--			<span style="color:yellow">Pending</span> : {{ pend_count }}-->
-<!--            	</div>-->
-<!--		<div class="counter" style="color:white">-->
-<!--                        <span style="color:#f2691d">Config</span> : {{ conf_count }}-->
-<!--                </div>-->
-<!--            	<div class="counter" style="color:white">-->
-<!--			<span style="color:red">Rejected</span> : {{ rej_count }}-->
-<!--            	</div>-->
-<!--            </div>-->
-<!--		{% if user.groups.all.0.name == 'Operational Level' %}-->
-<!--                	<a href="{% url 'create_ticket' %}" style="margin-left: 5%;"><span class="project_item main_tab" title="Create Ticket">Create New Ticket</span></a>-->
-<!--		{% endif %}-->
-<!--			{% if request.user|has_group:'Connection Group' or request.user|has_group:'Quality Group' or request.user|has_group:'Deinstallation Group' or request.user|has_group:'Emergency Group' or request.user|has_group:'Construction Group' or request.user|has_group:'Servicing Group' or request.user|has_group:'Welding Group' %}-->
-<!--			<a href="{% url 'team_ticket' %}" style="margin-left: 1%;"><span class="project_item main_tab" title="Team Ticket">My Team Ticket</span></a>-->
-<!--			{% endif %}-->
-<!--		{% if not request.user|has_group:'Quality Group' %}-->
-<!--	    <a href="{% url 'my_quality_ticket' %}" style="margin-left: 1%;"><span class="project_item main_tab" title="Quality">My Quality Ticket</span></a>-->
-<!--	    {% endif %}-->
-<!--	    </div>-->
-<!--        </header>-->
-<!--        <main id="main">-->
-<!--            {% if user.is_authenticated %}-->
-<!--            <table id="main_table" class="tab_content sortable_table scroll scroll_width_thin">-->
-<!--                <tbody class="main_table_tbody">-->
-<!--                    <tr>-->
-<!--                        {% block content %}-->
-<!--                        <form method="get">     -->
-<!--                            <div class="field_input" id="search_container">-->
-<!--                                {{ filter.form.as_p }}-->
-<!--                                <div id="search_id">-->
-<!--					<button type="submit" id="search_id">	<i class="fa fa-search" aria-hidden="true"></i>-->
-<!--					</button>-->
-<!--				</div>-->
-<!--                            </div>-->
+            <div id="mini_header">
+            <div class="counter_ticet">
+                <div class="counter" style="color:white">
+                        <span style="color: #ffffff">All</span> : {{ all_count }}
+                </div>
+            	<div class="counter" style="color:white">
+			<span style="color: #23bd23">Done</span> : {{ done_count }}
+            	</div>
+            	<div class="counter" style="color:white">
+			<span style="color: #7474ff">Waiting</span> : {{ wait_count }}
+            	</div>
+            	<div class="counter" style="color:white">
+			<span style="color:yellow">Pending</span> : {{ pend_count }}
+            	</div>
+		<div class="counter" style="color:white">
+                        <span style="color:#f2691d">Config</span> : {{ conf_count }}
+                </div>
+            	<div class="counter" style="color:white">
+			<span style="color:red">Rejected</span> : {{ rej_count }}
+            	</div>
+            </div>
+		{% if user.groups.all.0.name == 'Operational Level' %}
+                	<a href="{% url 'create_ticket' %}" style="margin-left: 5%;"><span class="project_item main_tab" title="Create Ticket">Create New Ticket</span></a>
+		{% endif %}
+			{% if request.user|has_group:'Connection Group' or request.user|has_group:'Quality Group' or request.user|has_group:'Deinstallation Group' or request.user|has_group:'Emergency Group' or request.user|has_group:'Construction Group' or request.user|has_group:'Servicing Group' or request.user|has_group:'Welding Group' %}
+			<a href="{% url 'team_ticket' %}" style="margin-left: 1%;"><span class="project_item main_tab" title="Team Ticket">My Team Ticket</span></a>
+			{% endif %}
+		{% if not request.user|has_group:'Quality Group' %}
+	    <a href="{% url 'my_quality_ticket' %}" style="margin-left: 1%;"><span class="project_item main_tab" title="Quality">My Quality Ticket</span></a>
+	    {% endif %}
+	    </div>
+        </header>
+        <main id="main">
+            {% if user.is_authenticated %}
+            <table id="main_table" class="tab_content sortable_table scroll scroll_width_thin">
+                <tbody class="main_table_tbody">
+                    <tr>
+                        {% block content %}
+                       <form method="get">    
+                            <div class="field_input" id="search_container">
+                                {{ filter.form.as_p }}
+                                <div id="search_id">
+					<button type="submit" id="search_id">	<i class="fa fa-search" aria-hidden="true"></i>
+					</button>
+				</div>
+                            </div>
 
-<!--                        </form>-->
-<!--                        {% endblock %}-->
-<!--                    </tr>-->
-<!--			<h1 style="text-align: center; margin-top: 1%; margin-bottom: 1%; position: absolute; top: 0%; left: 47.5%; font-weight: 100; font-variant-caps: small-caps;">My Ticket</h1>-->
-<!--                    {% for ticket in ticket_list reversed %}-->
-<!--                    <tr class="grid_container">-->
-<!--                        {% if ticket.bcrm_id   %}-->
-<!--                            <td title="BCRM ID">{{ ticket.bcrm_id}}</td>-->
-<!--                        {% elif ticket.rt_id  %}-->
-<!--                            <td title="RT ID">{{ ticket.rt_id}}</td>-->
-<!--                        {% elif ticket.ticketing_id  %}-->
-<!--                            <td title="TICKETING ID">{{ ticket.ticketing_id}}</td>-->
-<!--                        {% endif %}-->
-<!--                        <td title="Ticket Thread" class="site_id scroll scroll_width_thin">{{ ticket.ticket_thread_name }}</td>-->
-<!--                        <td title="Service Type" class="cell_id scroll scroll_width_thin">{{ ticket.service_type }}</td>-->
-<!--                        <td id='ticket_id' title="Status" class="priority scroll scroll_width_thin">{{ ticket.status }}</td>-->
-<!--                        <td title="End Date" class="scroll scroll_width_thin">{{ ticket.end_date }}</td>-->
-<!--                        <td title="Creation Date" class="scroll scroll_width_thin">{{ ticket.creation_date }}</td>-->
-<!--                        <td title="District" class="scroll scroll_width_thin">{{ ticket.district }}</td>-->
-<!--                        <td title="Address" class="scroll scroll_width_thin">{{ ticket.address }}</td>-->
-<!--                        <td title="Tarif ID" class="initated_by scroll scroll_width_thin">{{ ticket.tarif_id }}</td>-->
-<!--                        <td title="Due Date" class="scroll scroll_width_thin">{{ ticket.due_date }}</td>-->
-<!--                        <td title="Performer" class="implementer scroll scroll_width_thin">{{ ticket.performer }}</td>-->
-<!--                        <td title="Deadline" class="scroll scroll_width_thin">{{ ticket.deadline }}</td>-->
-<!--			{% if ticket.tech_comment %}-->
-<!--				<td title="Comment" class="scroll scroll_width_thin">{{ ticket.tech_comment }}</td>-->
-<!--			{% else %}-->
-<!--                        	<td title="Comment" class="scroll scroll_width_thin">{{ ticket.comment }}</td>-->
-<!--			{% endif %}-->
-<!--                        <td title="Branch" class="scroll scroll_width_thin">-->
-<!--                            {{ ticket.branch_type }}-->
-<!--                        </td>-->
-<!--                        <td title="Click to Edit Request" class="scroll scroll_width_thin" id="edit_button_td" style="margin-top: 2x;">-->
-<!--                            <div class="dropdown_edit">-->
-<!--				{% if user.groups.all.0.name == 'Operational Level' %}-->
-<!--                                <a class="btn btn_default" href="{% url 'op_update' pk=ticket.ticket_id %}">-->
-<!--                                    <span class="glyphicon glyphicon-pencil">-->
-<!--                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>-->
-<!--				{% elif user.groups.all.0.name == 'All Levels' %}-->
-<!--                                <a class="btn btn_default" href="{% url 'ticket_detail' pk=ticket.ticket_id %}">-->
-<!--                                    <span class="glyphicon glyphicon-pencil">-->
-<!--                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-file-text-o" aria-hidden="true" title="View Ticket"></i>-->
-<!--                                {% elif user.groups.all.0.name == 'Technical Level' %}-->
-<!--                                <a class="btn btn_default" href="{% url 'tech_update' pk=ticket.ticket_id %}">-->
-<!--                                    <span class="glyphicon glyphicon-pencil">-->
-<!--                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>-->
-<!--                                {% elif user.groups.all.0.name == 'Config Level' %}-->
-<!--                                <a class="btn btn_default" href="{% url 'conf_update' pk=ticket.ticket_id %}">-->
-<!--                                    <span class="glyphicon glyphicon-pencil">-->
-<!--                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>-->
-<!--				{% endif %}-->
-<!--                                        </div>-->
-<!--                                    </span>-->
-<!--                                </a>-->
-<!--       -->
-<!--                            </div>-->
-<!--                        </td>-->
-<!--                    </tr>-->
-<!--                    {% endfor %}-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--            {% else %}-->
-<!--            <canvas id="canvas"></canvas>-->
-<!--            <form method="post" action="{% url 'login' %}" style="position:absolute">-->
-<!--                <div class="container">-->
-<!--                    <div class="box">-->
-<!--                        <a href="{% url 'login'%}" id="click_log_in_button">You are not autentificated.</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </form> -->
-
-
-<!--            {% endif %}-->
-<!--        </main>-->
-
-<!--                    <div id='ticket_pagination'>-->
-<!--            {% if is_paginated %}-->
-<!--	    	{% if request.get_full_path|length > 25 %}-->
-<!--                	{% if page_obj.has_previous %}-->
-<!--                    		<a href="?page={{ page_obj.previous_page_number }}&{{ request.get_full_path|slice:'20:' }}" class="page_prev"> << </a>-->
-<!--                	{% endif %}-->
-<!--                    		<p> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>.-->
-<!--                	{% if page_obj.has_next %}-->
-<!--                    		<a href="?page={{ page_obj.next_page_number }}&{{ request.get_full_path|slice:'20:' }}" class="page_next"> >> </a>-->
-<!--			{% endif %}-->
-<!--		{% else %}-->
-<!--		        {% if page_obj.has_previous %}-->
-<!--                                <a href="?page={{ page_obj.previous_page_number }}" class="page_prev"> << </a>-->
-<!--                        {% endif %}-->
-<!--                               <p> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>.-->
-<!--                        {% if page_obj.has_next %}-->
-<!--                                <a href="?page={{ page_obj.next_page_number }}" class="page_next"> >> </a>-->
-<!--                        {% endif %}-->
+                        </form>
+                        {% endblock %}
+                    </tr>
+			<h1 style="text-align: center; margin-top: 1%; margin-bottom: 1%; position: absolute; top: 0%; left: 47.5%; font-weight: 100; font-variant-caps: small-caps;">My Ticket</h1>
+                    {% for ticket in ticket_list reversed %}
+                    <tr class="grid_container">
+                        {% if ticket.bcrm_id   %}
+                            <td title="BCRM ID">{{ ticket.bcrm_id}}</td>
+                        {% elif ticket.rt_id  %}
+                            <td title="RT ID">{{ ticket.rt_id}}</td>
+                        {% elif ticket.ticketing_id  %}
+                            <td title="TICKETING ID">{{ ticket.ticketing_id}}</td>
+                        {% endif %}
+                        <td title="Ticket Thread" class="site_id scroll scroll_width_thin">{{ ticket.ticket_thread_name }}</td>
+                        <td title="Service Type" class="cell_id scroll scroll_width_thin">{{ ticket.service_type }}</td>
+                        <td id='ticket_id' title="Status" class="priority scroll scroll_width_thin">{{ ticket.status }}</td>
+                        <td title="End Date" class="scroll scroll_width_thin">{{ ticket.end_date }}</td>
+                        <td title="Creation Date" class="scroll scroll_width_thin">{{ ticket.creation_date }}</td>
+                        <td title="District" class="scroll scroll_width_thin">{{ ticket.district }}</td>
+                        <td title="Address" class="scroll scroll_width_thin">{{ ticket.address }}</td>
+                        <td title="Tarif ID" class="initated_by scroll scroll_width_thin">{{ ticket.tarif_id }}</td>
+                        <td title="Due Date" class="scroll scroll_width_thin">{{ ticket.due_date }}</td>
+                        <td title="Performer" class="implementer scroll scroll_width_thin">{{ ticket.performer }}</td>
+                        <td title="Deadline" class="scroll scroll_width_thin">{{ ticket.deadline }}</td>
+			{% if ticket.tech_comment %}
+				<td title="Comment" class="scroll scroll_width_thin">{{ ticket.tech_comment }}</td>
+			{% else %}
+                        	<td title="Comment" class="scroll scroll_width_thin">{{ ticket.comment }}</td>
+			{% endif %}
+                        <td title="Branch" class="scroll scroll_width_thin">
+                            {{ ticket.branch_type }}
+                        </td>
+                        <td title="Click to Edit Request" class="scroll scroll_width_thin" id="edit_button_td" style="margin-top: 2x;">
+                            <div class="dropdown_edit">
+				{% if user.groups.all.0.name == 'Operational Level' %}
+                                <a class="btn btn_default" href="{% url 'op_update' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+				{% elif user.groups.all.0.name == 'All Levels' %}
+                                <a class="btn btn_default" href="{% url 'ticket_detail' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-file-text-o" aria-hidden="true" title="View Ticket"></i>
+                                {% elif user.groups.all.0.name == 'Technical Level' %}
+                                <a class="btn btn_default" href="{% url 'tech_update' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+                                {% elif user.groups.all.0.name == 'Config Level' %}
+                                <a class="btn btn_default" href="{% url 'conf_update' pk=ticket.ticket_id %}">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        <div class="column_plus" style="margin-top: .1vw;"><i class="fa fa-edit" aria-hidden="true" title="Edit Ticket"></i>
+				{% endif %}
+                                        </div>
+                                    </span>
+                                </a>
+     
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <canvas id="canvas"></canvas>
+            <form method="post" action="{% url 'login' %}" style="position:absolute">
+                <div class="container">
+                    <div class="box">
+                        <a href="{% url 'login'%}" id="click_log_in_button">You are not autentificated.</a>
+                    </div>
+                </div>
+           </form>
 
 
-<!--		{% endif %}-->
-<!--            {% else %}-->
-<!--            <p>  . </p>-->
-<!--            {% endif %}-->
-<!--        </div>-->
+            {% endif %}
+        </main>
+
+                    <div id='ticket_pagination'>
+            {% if is_paginated %}
+	    	{% if request.get_full_path|length > 25 %}
+                	{% if page_obj.has_previous %}
+                    		<a href="?page={{ page_obj.previous_page_number }}&{{ request.get_full_path|slice:'20:' }}" class="page_prev"> << </a>
+                	{% endif %}
+                    		<p> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>.
+                	{% if page_obj.has_next %}
+                    		<a href="?page={{ page_obj.next_page_number }}&{{ request.get_full_path|slice:'20:' }}" class="page_next"> >> </a>
+			{% endif %}
+		{% else %}
+		        {% if page_obj.has_previous %}
+                                <a href="?page={{ page_obj.previous_page_number }}" class="page_prev"> << </a>
+                        {% endif %}
+                               <p> Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>.
+                        {% if page_obj.has_next %}
+                                <a href="?page={{ page_obj.next_page_number }}" class="page_next"> >> </a>
+                        {% endif %}
+
+
+		{% endif %}
+            {% else %}
+            <p>  . </p>
+            {% endif %}
+        </div>
 
 
         {% include "base_footer.html" %}

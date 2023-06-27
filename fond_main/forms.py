@@ -72,12 +72,7 @@ class CreateTicketForm(forms.ModelForm):
                 'due_date' : DatePickerInput(format ='%Y-%m-%d %H:%M', attrs=  {'class':'form-control'}),
                 'registration_date' : DatePickerInput(format ='%Y-%m-%d %H:%M', attrs=  {'class':'form-control'}),
                 }
-    # ------- stugum e katarum bcrm_id-ov,ete ayn ka ----------
-    def check_bcrm_id_if_exists(self):
-        bcrm_id = self.cleaned_data.get('bcrm_id')
-        if Ticket.objects.filter(bcrm_id=bcrm_id).exists():
-            raise forms.ValidationError("Nman bcrm_id-ov ticket arden ka ")
-        return bcrm_id
+
 
 class OPCustomForm(forms.ModelForm):
     class Meta:
